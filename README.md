@@ -12,7 +12,7 @@ Create a new hero with awesome abilities by merging together two already awesome
  * ~/get_hero/<hero_id>
 
 ## Triggers
- * A new hero was added
+ * A new hero was added to the main list
  
 ## Actions
  * Generate a hero
