@@ -9,15 +9,17 @@ url_prefix = "https://919cc80d.ngrok.io/"
 
 @app.route('/ifttt/v1/status')
 def status():
+    # returns current status
     if request.headers["IFTTT-Channel-Key"] != channel_key:
         err = Response(json.dumps(error_channel_key), mimetype='application/json; charset=utf-8')
         err.status_code = 401
         return err
     else:
-        return "Good"
+        return
 
 @app.route('/ifttt/v1/test/setup', methods=['POST'])
 def setup():
+    # returns sample input
     if request.headers["IFTTT-Channel-Key"] != channel_key:
         err = Response(json.dumps(error_channel_key), mimetype='application/json; charset=utf-8')
         err.status_code = 401
@@ -29,7 +31,7 @@ def setup():
 
 @app.route('/ifttt/v1/triggers/any_new_hero', methods=['POST'])
 def trigger_any_new_hero():
-
+    # trigger for whenever a new hero is added to the main list of heroes
     if request.headers["IFTTT-Channel-Key"] != channel_key:
         err = Response(json.dumps(error_channel_key), mimetype='application/json; charset=utf-8')
         err.status_code = 401
@@ -45,7 +47,7 @@ def trigger_any_new_hero():
 
 @app.route('/ifttt/v1/actions/generate_a_hero', methods=['POST'])
 def actions_generate_new_hero():
-
+    # action to generate a new hero with optional gender key input
     if request.headers["IFTTT-Channel-Key"] != channel_key:
         err = Response(json.dumps(error_channel_key), mimetype='application/json; charset=utf-8')
         err.status_code = 401
@@ -67,7 +69,8 @@ def actions_generate_new_hero():
         abort(404)
 
 @app.route('/ifttt/v1/get_hero/<hero_id>')
-def get_hero(hero_id):
+def get_generated_hero(hero_id):
+    # pulls generated hero information based of of the hero_id
     if hero_id in generated_heroes:
         return Response(json.dumps(generated_heroes[hero_id]),mimetype='application/json; charset=utf-8')
     else:
