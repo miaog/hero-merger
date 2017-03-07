@@ -44,7 +44,7 @@ def trigger_any_new_hero():
         abort(404)
 
 @app.route('/ifttt/v1/actions/generate_a_hero', methods=['POST'])
-def actions_create_new_things():
+def actions_generate_new_hero():
 
     if request.headers["IFTTT-Channel-Key"] != channel_key:
         err = Response(json.dumps(error_channel_key), mimetype='application/json; charset=utf-8')
